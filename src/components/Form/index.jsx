@@ -15,17 +15,18 @@ import {
   getLevenshteinDistance,
 } from "../core";
 import Styles from "./styles";
+import EndDialog from "../EndDialog";
 
 const Form = () => {
   const classes = Styles();
   const [data, setData] = useState("");
   const [history, setHistory] = useState([]);
   const [secret, setSecret] = useState("");
+  const [isEnd, setIsEnd] = useState(false);
 
   useEffect(() => {
     const randomString = generateRandomString(8);
     setSecret(randomString);
-    console.log(randomString);
   }, []);
 
   const handleKeyPress = (e) => {
@@ -36,6 +37,9 @@ const Form = () => {
       newItem.cows = countCows(newData, secret);
       newItem.lvsht = getLevenshteinDistance(newData, secret);
       setHistory([newItem, ...history]);
+      if (data === secret) {
+        setIsEnd(true);
+      }
       setData("");
     }
   };
@@ -46,6 +50,14 @@ const Form = () => {
     if (e.target.value.match(/^[a-zA-Z0-9]+$/) || e.target.value === "") {
       setData(e.target.value);
     }
+  };
+
+  const handleNewGame = () => {
+    setHistory([]);
+    setIsEnd(false);
+    const randomString = generateRandomString(8);
+    setSecret(randomString);
+    setData("");
   };
 
   return (
@@ -83,6 +95,11 @@ const Form = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <EndDialog
+        isVictory={isEnd}
+        open={isEnd}
+        onRestartClick={handleNewGame}
+      />
     </>
   );
 };

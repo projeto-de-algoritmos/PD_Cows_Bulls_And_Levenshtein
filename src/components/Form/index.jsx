@@ -7,17 +7,34 @@ import {
   TableRow,
   TextField,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {
+  countBulls,
+  countCows,
+  generateRandomString,
+  getLevenshteinDistance,
+} from "../core";
 import Styles from "./styles";
 
 const Form = () => {
   const classes = Styles();
   const [data, setData] = useState("");
   const [history, setHistory] = useState([]);
+  const [secret, setSecret] = useState("");
+
+  useEffect(() => {
+    const randomString = generateRandomString(8);
+    setSecret(randomString);
+    console.log(randomString);
+  }, []);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && data !== "") {
-      const newItem = { data: data };
+      const newData = data.toUpperCase();
+      const newItem = { data: newData, bulls: 0, cows: 0, lvsht: 0 };
+      newItem.bulls = countBulls(newData, secret);
+      newItem.cows = countCows(newData, secret);
+      newItem.lvsht = getLevenshteinDistance(newData, secret);
       setHistory([newItem, ...history]);
       setData("");
     }
@@ -25,6 +42,7 @@ const Form = () => {
 
   const handleChange = (e) => {
     // check if value is alfa numeric or empty and ignore if not
+    // QUESTION should upper and lower case distingue between each other?
     if (e.target.value.match(/^[a-zA-Z0-9]+$/) || e.target.value === "") {
       setData(e.target.value);
     }
@@ -35,6 +53,9 @@ const Form = () => {
       <TextField
         value={data}
         label="Insira sua Tentativa"
+        inputProps={{
+          maxLength: secret.length,
+        }}
         onChange={handleChange}
         onKeyUp={handleKeyPress}
       />
@@ -54,9 +75,9 @@ const Form = () => {
             {history.map((item, index) => (
               <TableRow key={index + "row" + item}>
                 <TableCell>{item.data}</TableCell>
-                <TableCell>0</TableCell>
-                <TableCell>0</TableCell>
-                <TableCell>0</TableCell>
+                <TableCell>{item.bulls}</TableCell>
+                <TableCell>{item.cows}</TableCell>
+                <TableCell>{item.lvsht}</TableCell>
               </TableRow>
             ))}
           </TableBody>

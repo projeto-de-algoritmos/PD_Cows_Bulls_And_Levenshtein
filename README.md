@@ -43,3 +43,5 @@ Abra navegador em `localhost:3000`
 Caso queira diminuir a dificuldade, altere a constante `SECRET_MAX_SIZE` para um valor menor.
 
 ## Vídeo
+
+O vídeo está disponível na pasta `assets/video.mp4`

@@ -13,7 +13,7 @@
 
 ## Sobre
 
-A aplicação consiste num jogo inspirado no clássico jogo Cows and Bulls, mas desta vez propusemos um desafio ao usuário, que ele deve adivinhar uma string alfanumérica aleatória
+A aplicação consiste num jogo inspirado no clássico jogo Cows and Bulls, mas desta vez propusemos um **desafio** (quer moleza vá jogar o campo minado com 4 bombas apenas) ao usuário, que ele deve adivinhar uma string alfanumérica aleatória
 de tamanho variável de 1 a 8. Para isso daremos também a distância de Levenshtein em relação a string correta. Use com sabedoria!!
 
 ## Screenshots

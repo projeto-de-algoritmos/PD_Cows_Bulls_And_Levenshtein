@@ -17,6 +17,8 @@ import {
 import Styles from "./styles";
 import EndDialog from "../EndDialog";
 
+const SECRET_MAX_SIZE = 8;
+
 const Form = () => {
   const classes = Styles();
   const [data, setData] = useState("");
@@ -25,7 +27,8 @@ const Form = () => {
   const [isEnd, setIsEnd] = useState(false);
 
   useEffect(() => {
-    const randomString = generateRandomString(8);
+    const randomString = generateRandomString(SECRET_MAX_SIZE);
+    console.log("Pare de espiar", randomString);
     setSecret(randomString);
   }, []);
 
@@ -37,7 +40,7 @@ const Form = () => {
       newItem.cows = countCows(newData, secret);
       newItem.lvsht = getLevenshteinDistance(newData, secret);
       setHistory([newItem, ...history]);
-      if (data === secret) {
+      if (data.toUpperCase() === secret) {
         setIsEnd(true);
       }
       setData("");
@@ -55,7 +58,8 @@ const Form = () => {
   const handleNewGame = () => {
     setHistory([]);
     setIsEnd(false);
-    const randomString = generateRandomString(8);
+    const randomString = generateRandomString(SECRET_MAX_SIZE);
+    console.log("Pare de espiar", randomString);
     setSecret(randomString);
     setData("");
   };
@@ -66,7 +70,7 @@ const Form = () => {
         value={data}
         label="Insira sua Tentativa"
         inputProps={{
-          maxLength: secret.length,
+          maxLength: SECRET_MAX_SIZE,
         }}
         onChange={handleChange}
         onKeyUp={handleKeyPress}

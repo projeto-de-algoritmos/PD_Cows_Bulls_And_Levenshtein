@@ -6,7 +6,9 @@ export const generateRandomString = (n) => {
     throw new Error("n is too large");
   }
 
-  for (let i = 0; i < n; i++) {
+  const maxN = Math.floor(Math.random() * (n - 1)) + 1;
+
+  for (let i = 0; i < maxN; i++) {
     let newChar = possible.charAt(Math.floor(Math.random() * possible.length));
     while (text.includes(newChar)) {
       newChar = possible.charAt(Math.floor(Math.random() * possible.length));

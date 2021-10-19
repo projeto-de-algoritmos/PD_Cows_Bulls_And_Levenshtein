@@ -13,11 +13,14 @@
 
 ## Sobre
 
-
+A aplicação consiste num jogo inspirado no clássico jogo Cows and Bulls, mas desta vez propusemos um desafio ao usuário, que ele deve adivinhar uma string alfanumérica aleatória
+de tamanho variável de 1 a 8. Para isso daremos também a distância de Levenshtein em relação a string correta. Use com sabedoria!!
 
 ## Screenshots
 
-
+![Inicial](./assets/p1.jpg)
+![Vitória](./assets/p2.jpg)
+![Lista](./assets/p3.jpg)
 
 ## Instalação
 
@@ -37,7 +40,6 @@ Abra navegador em `localhost:3000`
 
 ## Outros
 
+Caso queira diminuir a dificuldade, altere a constante `SECRET_MAX_SIZE` para um valor menor.
 
 ## Vídeo
-
-
